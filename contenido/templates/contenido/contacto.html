@@ -1,0 +1,43 @@
+ {% extends "contenido/menu.html" %} #manda a llamar el menu
+
+ {% block titulo %} Contacto {% endblock %} #asigna un titulo diferente a la pagina contacto
+
+{% block tituloBody %}Contacto{% endblock %}
+
+ {% block contenido %}  
+ 
+   
+<form>
+    <div class="form-group row mb-2">
+        <label for="nombre">Nombre</label>
+        <input class="form-control" type="text" name="nombre">
+    </div>
+
+    <div class="form-group row mb-2">
+        <label for="correo">Correo Electrónico</label>
+        <input class="form-control" type="text" name="correo">
+    </div>
+    
+    <div class="form-group row mb-2">
+        <label for="curso-select" class="font-bold text-gray-700">Curso:</label>
+        <select id="curso-select" name="nombre_curso" class="form-control">
+            <option value="">Elige un curso</option>
+            <option value="bases_de_datos">Bases de Datos</option>
+            <option value="programacion">Programación</option>
+            <option value="diseno_web">Diseño Web</option>
+        </select>  
+    </div>
+
+    <div class="form-group row mb-5">
+        <label for="comentarios">Comentarios</label>
+        <textarea class="form-control" cols="50" name="comentarios" placeholder="escribe tu comentario aqui"></textarea>  
+    </div>
+    
+    <div class="form-group row mb-5">
+        <button type="submit" class="btn btn-primary btn-lg btn-block" style="min-width: fit-content">Enviar</button>
+    </div>
+
+</form> 
+
+
+{% endblock %}
