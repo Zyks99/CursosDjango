@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,11 +40,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'contenido',
     'cursos.apps.CursosConfig',
+    'ckeditor'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -75,10 +78,21 @@ WSGI_APPLICATION = 'CursosDjango.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
+'''DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}'''
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'cursosDjango',
+        'USER': 'Alumno',
+        'PASSWORD':'1234',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 
@@ -105,9 +119,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es' 
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Mexico_City'
 
 USE_I18N = True
 
@@ -119,10 +133,114 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+#ckeditor
+
+CKEDITOR_CONFIGS ={
+    'default': {'toolbar': 'Custom',
+    'toolbar_Custom': [
+        ['Bold', 'Italic'],
+        ['NumberedList','Indent', '-',
+        'JustifyLeft', 'JustifyCenter'],
+        ['Link'],
+        [ 'Source']
+    ]
+    }
+}
+
+JAZZMIN_SETTINGS = {
+    "site_title": "Cursos Django Admin",
+
+    # Encabezado del panel de administración
+    "site_header": "Administración los cursos de django",
+
+
+  # "site_logo": "img/logo.png",
+
+    # URL a la que redirige el logo
+    "site_brand": "CursosDjango",
+
+    # Favicon
+    # "site_icon": "img/favicon.ico",
+
+
+    "theme": "minty", 
+    "dark_mode_theme": None,
+
+    # Mostrar/ocultar el "UI Customizer" (el botón de personalización en vivo)
+    #"show_ui_builder": True,
+
+    # Opciones de navegación
+    "topmenu_links": [
+        {"name": "Inicio", "url": "admin:index", "permissions": ["auth.view_user"]},
+        #{"name": "Soporte", "url": "https://github.com/farridav/django-jazzmin/issues"},
+        {"model": "auth.User"}, # Enlace directo al modelo de usuarios
+        {"app": "books"}, # Enlace directo a una aplicación completa
+    ],
+
+    # Iconos para las aplicaciones y modelos
+    # Puedes usar Font Awesome 5 Free
+    "icons": {
+        "auth": "fas fa-users-cog",
+        "auth.user": "fas fa-user",
+        "auth.Group": "fas fa-users",
+        # 'app_name.model_name': 'fas fa-icon_name'
+    },
+    
+    # Ocultar aplicaciones o modelos del menú lateral
+    "hide_apps": ["flatpages", "filebrowser"],
+    "hide_models": ["auth.group"],
+
+    # Ordenar aplicaciones y modelos en el menú lateral
+    #"order_with_respect_to": ["auth", "books", "myapp"],
+
+    # Footer (pie de página)
+    "footer_text": "Copyright © 2025 CursosDjango.",
+
+}
+
+# Opciones para el UI Customizer (opcional)
+JAZZMIN_UI_TWEAKS = {
+    "navbar_small_text": False,
+    "footer_small_text": False,
+    "body_small_text": False,
+    "brand_small_text": False,
+    "brand_colour": False,
+    "accent": "accent-primary",
+    "navbar": "navbar-white navbar-light",
+    "no_navbar_border": False,
+    "navbar_fixed": False,
+    "layout_boxed": False,
+    "nav_sidebar_on_hover": False,
+    "nav_sidebar_disable_expand": False,
+    "nav_sidebar_fixed": True,
+    "layout_fixed": True,
+    "sidebar": "sidebar-light-white",
+    "sidebar_nav_small_text": True,
+    "sidebar_disable_expand": False,
+    "sidebar_nav_child_indent": False,
+    "sidebar_nav_compact_style": False,
+    "sidebar_nav_legacy_style": True,
+    "sidebar_nav_flat_style": False,
+    "theme": "flatly",
+    "dark_mode_theme": None,
+    "button_classes": {
+        "primary": "btn-outline-primary",
+        "secondary": "btn-outline-secondary",
+        "info": "btn-info",
+        "warning": "btn-warning",
+        "danger": "btn-danger",
+        "success": "btn-success"
+    }
+}
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")

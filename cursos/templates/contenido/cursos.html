@@ -1,0 +1,48 @@
+ {% extends "contenido/menu.html" %} #manda a llamar el menu
+ {% block titulo %} Cursos {% endblock %} #asigna un titulo diferente a la pagina contacto
+{% block tituloBody %}Cursos{% endblock %}
+ {% block contenido %}  
+ 
+<form class="form-horizontal" action="{% url 'Registrar' %}" method="POST" role="form" enctype="multipart/form-data">
+    {% csrf_token %}
+  <div class="mb-3">
+    <label for="nombreCurso" class="form-label">Nombre del Curso</label>
+    <input type="text" class="form-control" id="nombreCurso" name="nombre">
+  </div>
+
+  <div class="mb-3">
+    <label for="descripcionCurso" class="form-label">Descripción del Curso</label>
+    <textarea class="form-control" id="descripcionCurso" name="descripcion" rows="5">Descripción detallada del curso.</textarea>
+  </div>
+
+  <div class="mb-3">
+    <label for="imagenCurso" class="form-label">Imagen del Curso</label>
+    <input type="file" class="form-control" id="imagenCurso" name="image" accept="image/*">
+  </div>
+
+  <div class="mb-3 form-check">
+    <input type="checkbox" class="form-check-input" id="estatusCurso" name="estatus" checked>
+    <label class="form-check-label" for="estatusCurso">Activo</label>
+  </div>
+
+  <div class="mb-3">
+    <label for="precioCurso" class="form-label">Precio del Curso</label>
+    <input type="number" step="0.01" class="form-control" id="precioCurso" name="precio" min="0">
+  </div>
+
+  <div class="mb-3">
+    <label for="duracionCurso" class="form-label">Duración (horas)</label>
+    <input type="number" class="form-control" id="duracionCurso" name="duracion" min="0">
+  </div>
+
+  <div class="mb-3">
+    <label for="fechaInicioCurso" class="form-label">Fecha de Inicio</label>
+    <input type="date" class="form-control" id="fechaInicioCurso" name="fecha_inicio">
+  </div>
+
+  <button type="submit" class="btn btn-primary">Guardar Curso</button>
+</form>
+{% endblock %}
+
+
+          

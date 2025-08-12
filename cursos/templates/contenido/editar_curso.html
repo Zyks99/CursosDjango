@@ -1,0 +1,30 @@
+{% extends "contenido/menu.html" %}
+
+{% block titulo %} Editar Curso {% endblock %}
+{% block tituloBody %}Editar Curso{% endblock %}
+
+{% block contenido %}
+<div class="container mt-4">
+    <h2 class="mb-4">Editar Curso: {{ curso.nombre }}</h2> {# Muestra el nombre del curso actual #}
+
+    <form class="form-horizontal" action="{% url 'editar_curso' curso.id %}" method="POST" role="form" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {% for field in form %}
+            <div class="mb-3">
+                {{ field.label_tag }}
+                {{ field }}
+                {% if field.help_text %}
+                    <div class="form-text">{{ field.help_text }}</div>
+                {% endif %}
+                {% if field.errors %}
+                    {% for error in field.errors %}
+                        <div class="alert alert-danger mt-1">{{ error }}</div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        {% endfor %}
+         <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+        </form>
+</div>
+{% endblock %}
