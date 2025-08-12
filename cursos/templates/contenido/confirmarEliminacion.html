@@ -1,0 +1,23 @@
+{% extends "contenido/menu.html" %}
+
+{% block titulo %} Eliminar Curso {% endblock %}
+{% block tituloBody %}Eliminar Curso{% endblock %}
+
+{% block contenido %}
+<div class="container mt-4">
+    <form method="POST">
+        {% csrf_token %}
+        <div class="alert alert-danger" role="alert">
+            <p>¿Estás seguro de que deseas <strong>Eliminar</strong> el curso <strong>"{{ object.nombre }}"</strong>?</p> 
+        </div>
+        <div class="row mt-3">
+            <div class="col-6">
+                 <button type="submit" class="btn btn-danger w-100">Sí</button>
+            </div>
+            <div class="col-6">
+        <a href="{%url 'ver_cursos'%}" class="btn btn-primary w-100">Cancelar</a>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
